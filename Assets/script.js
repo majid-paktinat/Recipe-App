@@ -5,19 +5,50 @@ let analyzedInstructionsArr = [];
 let imageAdd;
 let mealImage
 
-let settings = {
-	"async": true,
-	"crossDomain": true,
-    "method": "GET",
-    "url": "https://api.spoonacular.com/recipes/complexSearch?minFat=1&maxFat=50&minCarbs=5&maxCarbs=100&number=5&type=salad&addRecipeInformation=true&apiKey=b588453d88164a63a6b235e77276dcd0"
-    //"url": "https://api.spoonacular.com/recipes/582897/nutritionWidget?apiKey=54f37f7c8cf54dabb996147b296b7f34&defaultCss=true" //$('body').html(response);
+const apikey = "b588453d88164a63a6b235e77276dcd0";
+
+let diet;
+let cuisine;
+let mealType;
+let intolerance;
+let ingredientIn;
+let ingredientEx;
+let settings;
     
-	}
+// This function handles events where one button is clicked
+$("#btnSearch").on("click", function(event) {
+    // event.preventDefault() prevents the form from trying to submit itself.
+    // We're using a form so that the user can hit enter instead of clicking the button if they want
+    event.preventDefault();
+
+    // This part grabs the inputs to do search
+    ingredientIn = escape($("#ingredientIn").val().trim());
+    ingredientEx = escape($("#ingredientEx").val().trim());
+    diet = escape($("#diet").val());diet = (diet=="nal")?"":diet;
+    cuisine = escape($("#cuisine").val());cuisine = (cuisine=="nal")?"":cuisine;
+    mealType = escape($("#mealType").val());mealType = (mealType=="nal")?"":mealType;
+    intolerance =  escape($("#intolerance").val());intolerance = (intolerance=="nal")?"":intolerance;
+    console.log(ingredientIn);console.log(ingredientEx);console.log(diet);console.log(cuisine);console.log(mealType);console.log(intolerance);
+    
+    settings = {
+        "async": true,
+        "crossDomain": true,
+        "method": "GET",
+        "url": `https://api.spoonacular.com/recipes/complexSearch?minFat=1&maxFat=10000&minCarbs=5&maxCarbs=100&number=${5}&addRecipeInformation=true&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
+        //"url": "https://api.spoonacular.com/recipes/582897/nutritionWidget?apiKey=54f37f7c8cf54dabb996147b296b7f34&defaultCss=true" //$('body').html(response);
+        
+        }
+    
+    $('#meal-image-view').html(""); //searchCall();
+});
 
 
-$.ajax(settings).then(getResponse);
+function searchCall(){
+    $.ajax(settings).then(getResponse);
 
-$.ajax(settings).fail(getError);
+    $.ajax(settings).fail(getError);
+}
+
 
 
 function getResponse( response ){
@@ -62,15 +93,16 @@ function getResponse( response ){
         mealImage = $('<img />');
         mealImage.attr("src", imageAdd);
         $('#meal-image-view').append(mealImage);
-        
+        console.log("AAAAA");
         resultsCounter = resultsCounter + 1;
     }
 
     
     
-   
+    
 }
 function getError( errorStatus ) {
     console.log(`<.Fail> callback <${errorStatus}>`);
 }
+
 

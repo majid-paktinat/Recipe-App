@@ -10,12 +10,174 @@
     <title>Document</title>
 </head>
 <body>
-    <div>Header</div>
+   
+    <div class="container">
+        <div class="header">
+            <header>MEAL PLAN</header>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h>Customize Your Meal</h>
+            </div>
+            <div class="card-body">
+                <div class="form">
+                    <label for="ingredientIn">Ingredients Include:</label>
+                    <input type="text" class='form-control' id="ingredientIn">
+                </div>
+                <div class="form">
+                    <label for="ingredientEx">Ingredients Exclude:</label>
+                    <input type="text" class='form-control' id="ingredientEx">
+                </div>
+                <div class="form">
+                    <label for="dietType">Diets Type:</label>
+                    <select id="diet" class='form-control'>
+                    <option value="nal"></option>
+                    <option value="glutenFree">Gluten Free</option>
+                    <option value="ketogenic">Ketogenic</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="lactoVegetarian">Lacto-Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="pescetarian">Pescetarian</option>
+                    <option value="paleo">Paleo</option>
+                    <option value="primal">Primal</option>
+                    <option value="whole30">Whole30</option>
+                    <option value="ovoVegetarian">Ovo-Vegetarian</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="cuisine">Cuisines:</label>
+                    <select id="cuisine" class='form-control'>
+                    <option value="nal"></option>
+                    <option value="african">African</option>
+                    <option value="american">American</option>
+                    <option value="british">British</option>
+                    <option value="cajun">Cajun</option>
+                    <option value="caribbean">Caribbean</option>
+                    <option value="chinese">Chinese</option>
+                    <option value="easternEuropean">Eastern European</option>
+                    <option value="european">European</option>
+                    <option value="french">French</option>
+                    <option value="german">German</option>
+                    <option value="greek">Greek</option>
+                    <option value="indian">Indian</option>
+                    <option value="irish">Irish</option>
+                    <option value="italian">Italian</option>
+                    <option value="japanese">Japanese</option>
+                    <option value="jewish">Jewish</option>
+                    <option value="korean">Korean</option>
+                    <option value="latinAmerican">Latin American</option>
+                    <option value="mediterranean">Mediterranean</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="middleEastern">Middle Eastern</option>
+                    <option value="nordic">Nordic</option>
+                    <option value="southern">Southern</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="thai">Thai</option>
+                    <option value="vietnamese">Vietnamese</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="mealType">Meal Type:</label>
+                    <select id="mealType" class='form-control'>
+                    <option value="nal"></option>
+                    <option value="main course">Main Course</option>
+                    <option value="side dish">Side Dish</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="appetizer">Appetizer</option>
+                    <option value="salad">Salad</option>
+                    <option value="bread">Bread</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="soup">Soup</option>
+                    <option value="beverage">Beverage</option>
+                    <option value="sauce">Sauce</option>
+                    <option value="marinade">Marinade</option>
+                    <option value="fingerFood">Fingerfood</option>
+                    <option value="snack">Snack</option>
+                    <option value="drink">Drink</option>
+                    </select>
+                </div>
+                <div class="form">
+                    <label for="intolerance">Intolerances:</label>
+                    <select id="intolerance" class='form-control'>
+                    <option value="nal"></option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Gluten">Gluten</option>
+                    <option value="Grain">Grain</option>
+                    <option value="Peanut">Peanut</option>
+                    <option value="Seafood">Seafood</option>
+                    <option value="Sesame">Sesame</option>
+                    <option value="ShellFish">Shellfish</option>
+                    <option value="Soy">Soy</option>
+                    <option value="Sulfite">Sulfite</option>
+                    <option value="Tree Nut">Tree Nut</option>
+                    <option value="Wheat">Wheat</option>
+                    </select>
+                </div>
+                <button type="button" id="btnSearch" class="btn btn-primary">Search</button>
+            </div>
+        </div>
 
 
-    <div>Body</div>
+        
+
+        
+        <div class="card">
+            <div class="card-header">
+                <h>Sorted By:</h>
+            </div>
+            <div class="card-body ">
+                <div class="form">
+                    <label for="sortByI">Sort-By:</label>
+                    <select id="sortByI" class="form-control">
+                        <option value="nal"></option>
+                        <option value="carbs">Carbs</option>
+                        <option value="protein">Protein</option>
+                        <option value="calories">Calories</option>
+                        <option value="fat">Fat</option>
+                        <option value="sugar">Sugar</option>
+                        <option value="sodium">Sodium</option>
+                        <option value="fiber">fiber</option>
+                    </select>
+                </div> 
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h>Result View:</h>
+            </div>
+            <div class="card-body ">FFF
+                <div id="meal-image-view">
+
+
+                    <div class="row"  >
+                        <div class="col cityInfo" style="margin-left: 15px; margin-right: 15px; margin-top:20px ;">
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <span id="cityName" style="margin-right: 10px;"><h2>&nbsp</h2></span>&nbsp;<img id="currentWeatherIcon" src="" style="border: solid 0px; padding-left: 5px; padding-top:0px; padding-right: 0px; margin-top: -32px;">
+                            </div>
+                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span id="tempMain" style="color: gray; font-size: 15px;">Temperature:</span> </div>  
+                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span id="humidityMain" style="color: gray; font-size: 15px;">Humidity:</span> </div>  
+                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span id="windMain" style="color: gray; font-size: 15px;">Wind Speed:</span> </div>  
+                            <div style="margin-top: 10px; padding-left: 0px; border: solid 0px;" class="col">
+                                <span style="color: gray; font-size: 15px;">UV Index:</span>
+                                <span id="uvMain" style="color: white; background-color:#DB3348; padding-left: 10px; border-radius: 5px; padding-right: 10px; padding-top: 2px; padding-bottom: 3px;">uvMain</span>
+                            </div> 
+                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span style="color: gray; font-size: 15px;">&nbsp</span> </div>  
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>   
     
-    <div id="meal-image-view"></div>
+
 
     <script src="Assets/script.js"></script>
 </body>
