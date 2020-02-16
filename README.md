@@ -47,3 +47,8 @@ https://spoonacular.com/food-api/docs#Search-Recipes-Complex
     analyzedInstructions.step
     image
     serving
+
+
+Sorting
+Pagination
+Link to https://api.spoonacular.com/recipes/{id}/nutritionWidget?&defaultCss=trueapiKey=...

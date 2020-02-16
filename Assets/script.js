@@ -107,8 +107,9 @@ function getResponse( response ){
         
         $(`#recipeEl${resultsCounter+1}`).text(recipeConcat); 
 
-        document.querySelector(`#meal-image-view${resultsCounter+1}`).style.opacity = 1;
         
+        document.querySelector(`#meal-image-view${resultsCounter+1}`).style.opacity = 1;
+        if (resultsCounter!=0) document.querySelector(`#resultView`).style.opacity = 1;
 
         resultsCounter = resultsCounter + 1;
     }
