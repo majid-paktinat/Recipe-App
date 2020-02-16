@@ -15,7 +15,7 @@ https://api.spoonacular.com/recipes/complexSearch?minFat=1&maxFat=50&number=5&ty
 
 https://api.spoonacular.com/food/ingredients/autocomplete?query=appl&number=5&apiKey=...
 
-https://api.spoonacular.com/recipes/{id}/nutritionWidget?&defaultCss=trueapiKey=...
+https://api.spoonacular.com/recipes/{id}/nutritionWidget?&defaultCss=true&apiKey=...
 
 https://spoonacular.com/food-api/docs#Diets
 https://spoonacular.com/food-api/docs#Cuisines
@@ -52,3 +52,4 @@ https://spoonacular.com/food-api/docs#Search-Recipes-Complex
 Sorting
 Pagination
 Link to https://api.spoonacular.com/recipes/{id}/nutritionWidget?&defaultCss=trueapiKey=...
+chetori minimum ha ro bedam
