@@ -5,8 +5,8 @@ let analyzedInstructionsArr = [];
 let imageAdd;
 let mealImage
 
-const apikey = "b588453d88164a63a6b235e77276dcd0";
-//const apikey = "7be734db65ca420487a133024e247177";
+//const apikey = "b588453d88164a63a6b235e77276dcd0";
+const apikey = "7be734db65ca420487a133024e247177";
 //const apikey = "54f37f7c8cf54dabb996147b296b7f34";
 
 
@@ -17,6 +17,7 @@ let intolerance;
 let ingredientIn;
 let ingredientEx;
 let settings;
+let nutrition = [];
     
 // This function handles events where one button is clicked
 $("#btnSearch").on("click", function(event) {
@@ -34,14 +35,12 @@ $("#btnSearch").on("click", function(event) {
     //console.log(ingredientIn);console.log(ingredientEx);console.log(diet);console.log(cuisine);console.log(mealType);console.log(intolerance);
     
     
-    settings = {
+    settingsAPI = {
         "async": true,
         "crossDomain": true,
         "method": "GET",
-        "url": `https://api.spoonacular.com/recipes/complexSearch?minFat=1&maxFat=10000&minCarbs=5&maxCarbs=100&number=${5}&addRecipeInformation=true&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
-        //"url": "https://api.spoonacular.com/recipes/582897/nutritionWidget?apiKey=54f37f7c8cf54dabb996147b296b7f34&defaultCss=true" //$('body').html(response);
-        
-        }
+        "url": `https://api.spoonacular.com/recipes/complexSearch?minCalories=1&maxCalories=10000&minProtein=1&maxProtein=10000&minFat=1&maxFat=10000&minCarbs=1&maxCarbs=10000&number=${5}&addRecipeInformation=true&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
+    }
     
     
     searchCall();
@@ -49,11 +48,16 @@ $("#btnSearch").on("click", function(event) {
 
 
 function searchCall(){
-    $.ajax(settings).then(getResponse);
+    $.ajax(settingsAPI).then(getResponse);
 
-    $.ajax(settings).fail(getError);
+    $.ajax(settingsAPI).fail(getError);
 }
 
+function nutritionCall(){
+    $.ajax(settingsAPI).then(getnutritionResponse);
+
+    $.ajax(settingsAPI).fail(getnutritionError);
+}
 
 
 function getResponse( response ){
@@ -108,8 +112,14 @@ function getResponse( response ){
         $(`#recipeEl${resultsCounter+1}`).text(recipeConcat); 
 
         
+        $(`#calEl${resultsCounter+1}`).html("Calories : " + Math.floor(nutritionArr[0].amount)+ " <b>" +nutritionArr[0].unit + "</b>"); 
+        $(`#proEl${resultsCounter+1}`).html("Protein : " + Math.floor(nutritionArr[1].amount)+ " <b>" +nutritionArr[1].unit + "</b>");
+        $(`#fatEl${resultsCounter+1}`).html("Fat : " + Math.floor(nutritionArr[2].amount)+ " <b>" +nutritionArr[2].unit + "</b>");
+        $(`#carEl${resultsCounter+1}`).html("Carbs : " + Math.floor(nutritionArr[3].amount)+ " <b>" +nutritionArr[3].unit + "</b>"); 
+
         document.querySelector(`#meal-image-view${resultsCounter+1}`).style.opacity = 1;
         if (resultsCounter!=0) document.querySelector(`#resultView`).style.opacity = 1;
+        
 
         resultsCounter = resultsCounter + 1;
     }
@@ -126,3 +136,10 @@ function getError( errorStatus ) {
 }
 
 
+function getnutritionResponse(response){
+    
+}
+
+function getnutritionError(errorStatus){
+
+}

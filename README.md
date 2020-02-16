@@ -49,7 +49,20 @@ https://spoonacular.com/food-api/docs#Search-Recipes-Complex
     serving
 
 
-Sorting
-Pagination
+
+Sorting ?
+
+recipe search (AutoComplete)
+
+
+
+
+
+
+Pagination ?
+
+pass into innerHTML of a div (in same page or new page)
 Link to https://api.spoonacular.com/recipes/{id}/nutritionWidget?&defaultCss=trueapiKey=...
-chetori minimum ha ro bedam
+
+
+next point ham ke font name - font size - bold - underline - .... div haye mokhtalefe... 
