@@ -1,0 +1,87 @@
+/* === RESPONSIVE FLEX EXAMPLE W/ MEDIA QUERIES */
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+html, body {
+	height:100%;
+}
+
+/* === MOBILE FIRST === */
+
+#s1 {
+	background: url(../Assets/images/bg5.jpg) no-repeat fixed center center;
+	background-size: cover;
+	min-height:80%;
+	height:auto;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#s1 hgroup {
+	background:rgba(0,0,0,.7);
+	padding: 10px;
+}
+
+#s1 h1, #s1 h2 {
+	color:#fff;
+	text-align: center;
+}
+#s1 h1 {
+	font-family: 'Great Vibes', cursive;     
+	font-size: 4vmax;
+}
+#s1 h2 {
+	font-family: 'Great Vibes', cursive;   
+	font-size: 2vmax;
+}
+
+#s2 {
+    display: flex;  
+    flex-flow: row wrap;
+    text-align: center;
+}
+#s2 h2 {
+	font-family: 'Fondamento', cursive    
+}
+
+.main {
+	background: #DAECF3; 
+    text-align: left;
+	padding:80px;
+	flex: 1 100%;
+	padding-top: 20px;
+	padding-left: 50px;
+}
+.aside1 {
+	font-weight: bold;
+	background: #C4B8AA;
+	padding:10px;
+	flex: 1 100%;
+	font-family: 'Fondamento', cursive
+}
+
+
+/* === TABLET LAYOUT INHERITS FROM MOBILE === */
+@media all and (min-width: 600px) {
+    .aside { flex: 1 auto; }
+}
+
+/* === DESKTOP LAYOUT INHERITS FROM MOBILE AND TABLET === */
+
+@media all and (min-width: 800px) {
+    .main    { flex: 3 0px; }
+    .aside1 { order: 1; } 
+    .main    { order: 3; }
+    .aside2 { order: 2; }
+	#s1 h1 {
+		font-family: 'Great Vibes', cursive; 
+		font-size: 10vmax;
+	}
+}
+
+
+
+
