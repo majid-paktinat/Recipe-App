@@ -143,38 +143,88 @@
             </div>
         </div>
         
+        
+
         <div class="card">
             <div class="card-header">
                 <h>Result View:</h>
             </div>
-            <div class="card-body ">FFF
+            <div class="card-body ">
                 <div id="meal-image-view">
-
-
-                    <div class="row"  >
-                        <div class="col cityInfo" style="margin-left: 15px; margin-right: 15px; margin-top:20px ;">
+                    <div class="row" id="meal-image-view1" style="border: solid 0px; margin-left: 10px; margin-right: 10px; opacity: 0">
+                        <div class="col" style="border:solid 1px ; border-color: lightgray; margin-left: 15px; margin-right: 15px; margin-top:20px ;">
                             <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
-                                <span id="cityName" style="margin-right: 10px;"><h2>&nbsp</h2></span>&nbsp;<img id="currentWeatherIcon" src="" style="border: solid 0px; padding-left: 5px; padding-top:0px; padding-right: 0px; margin-top: -32px;">
+                                <div class="col"  id="titleEl1" style="border: solid 0px; margin-right: 10px;">&nbsp;</div>
+                                <div class="col"  id="currentMealEl1" style="border: solid 0px; margin-right: 10px;">
+                                    <img id="currentMealImgEl1" src="" >
+                                </div>
                             </div>
-                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span id="tempMain" style="color: gray; font-size: 15px;">Temperature:</span> </div>  
-                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span id="humidityMain" style="color: gray; font-size: 15px;">Humidity:</span> </div>  
-                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span id="windMain" style="color: gray; font-size: 15px;">Wind Speed:</span> </div>  
-                            <div style="margin-top: 10px; padding-left: 0px; border: solid 0px;" class="col">
-                                <span style="color: gray; font-size: 15px;">UV Index:</span>
-                                <span id="uvMain" style="color: white; background-color:#DB3348; padding-left: 10px; border-radius: 5px; padding-right: 10px; padding-top: 2px; padding-bottom: 3px;">uvMain</span>
-                            </div> 
-                            <div style="margin-top: 10px; padding-left: 0px;" class="col"><span style="color: gray; font-size: 15px;">&nbsp</span> </div>  
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="recipeEl1" style="color: gray; font-size: 15px;">&nbsp;</div>
+                            </div>  
                         </div>
                     </div>
 
 
+                    <div class="row" id="meal-image-view2" style="border: solid 0px; margin-left: 10px; margin-right: 10px; opacity: 0;">
+                        <div class="col" style="border:solid 1px; border-color: lightgray; margin-left: 15px; margin-right: 15px; margin-top:20px ;">
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="titleEl2" style="border: solid 0px; margin-right: 10px;">&nbsp;</div>
+                                <div class="col"  id="currentMealEl2" style="border: solid 0px; margin-right: 10px;">
+                                    <img id="currentMealImgEl2" src="" >
+                                </div>
+                            </div>
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="recipeEl2" style="color: gray; font-size: 15px;">&nbsp;</div>
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div class="row" id="meal-image-view3" style="border: solid 0px; margin-left: 10px; margin-right: 10px; opacity: 0;">
+                        <div class="col" style="border:solid 1px; border-color: lightgray; margin-left: 15px; margin-right: 15px; margin-top:20px ;">
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="titleEl3" style="border: solid 0px; margin-right: 10px;">&nbsp;</div>
+                                <div class="col"  id="currentMealEl3" style="border: solid 0px; margin-right: 10px;">
+                                    <img id="currentMealImgEl3" src="" >
+                                </div>
+                            </div>
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="recipeEl3" style="color: gray; font-size: 15px;">&nbsp;</div>
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div class="row" id="meal-image-view4" style="border: solid 0px; margin-left: 10px; margin-right: 10px; opacity: 0;">
+                        <div class="col" style="border:solid 1px; border-color: lightgray; margin-left: 15px; margin-right: 15px; margin-top:20px ;">
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="titleEl4" style="border: solid 0px; margin-right: 10px;">&nbsp;</div>
+                                <div class="col"  id="currentMealEl4" style="border: solid 0px; margin-right: 10px;">
+                                    <img id="currentMealImgEl4" src="" >
+                                </div>
+                            </div>
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="recipeEl4" style="color: gray; font-size: 15px;">&nbsp;</div>
+                            </div>  
+                        </div>
+                    </div>
+
+
+                    <div class="row" id="meal-image-view5" style="border: solid 0px; margin-left: 10px; margin-right: 10px; opacity: 0;">
+                        <div class="col" style="border:solid 1px; border-color: lightgray; margin-left: 15px; margin-right: 15px; margin-top:20px ;">
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="titleEl5" style="border: solid 0px; margin-right: 10px;">&nbsp;</div>
+                                <div class="col"  id="currentMealEl5" style="border: solid 0px; margin-right: 10px;">
+                                    <img id="currentMealImgEl5" src="" >
+                                </div>
+                            </div>
+                            <div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
+                                <div class="col"  id="recipeEl5" style="color: gray; font-size: 15px;">&nbsp;</div>
+                            </div>  
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-
-
-
-
     </div>   
     
 
@@ -182,3 +232,7 @@
     <script src="Assets/script.js"></script>
 </body>
 </html>
+
+
+
+      

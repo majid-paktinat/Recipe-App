@@ -6,6 +6,9 @@ let imageAdd;
 let mealImage
 
 const apikey = "b588453d88164a63a6b235e77276dcd0";
+//const apikey = "7be734db65ca420487a133024e247177";
+//const apikey = "54f37f7c8cf54dabb996147b296b7f34";
+
 
 let diet;
 let cuisine;
@@ -28,7 +31,8 @@ $("#btnSearch").on("click", function(event) {
     cuisine = escape($("#cuisine").val());cuisine = (cuisine=="nal")?"":cuisine;
     mealType = escape($("#mealType").val());mealType = (mealType=="nal")?"":mealType;
     intolerance =  escape($("#intolerance").val());intolerance = (intolerance=="nal")?"":intolerance;
-    console.log(ingredientIn);console.log(ingredientEx);console.log(diet);console.log(cuisine);console.log(mealType);console.log(intolerance);
+    //console.log(ingredientIn);console.log(ingredientEx);console.log(diet);console.log(cuisine);console.log(mealType);console.log(intolerance);
+    
     
     settings = {
         "async": true,
@@ -39,7 +43,8 @@ $("#btnSearch").on("click", function(event) {
         
         }
     
-    $('#meal-image-view').html(""); //searchCall();
+    
+    searchCall();
 });
 
 
@@ -56,6 +61,7 @@ function getResponse( response ){
     
     
     let resultsCounter = 0;
+    
     while (resultsCounter<response.results.length){
 
         console.log(`Id is : ${response.results[resultsCounter].id}`);
@@ -76,11 +82,14 @@ function getResponse( response ){
         analyzedInstructionsArr = response.results[resultsCounter].analyzedInstructions; 
         let analyzedInstructionsCounter=0;
         let stepsCounter = 0;
+        let recipeConcat;
         while (analyzedInstructionsCounter<analyzedInstructionsArr.length){
+            recipeConcat = "Recipe : ";
             while(stepsCounter<analyzedInstructionsArr[analyzedInstructionsCounter].steps.length){
                 console.log(`analyzedInstructions Name : ${analyzedInstructionsArr[analyzedInstructionsCounter].name}`); 
                 console.log(`analyzedInstructions Steps(number) : ${analyzedInstructionsArr[analyzedInstructionsCounter].steps[stepsCounter].number}`);
                 console.log(`analyzedInstructions Steps(step) : ${analyzedInstructionsArr[analyzedInstructionsCounter].steps[stepsCounter].step}`);
+                recipeConcat = recipeConcat + ((recipeConcat=="Recipe : ")?"":" | ") + analyzedInstructionsArr[analyzedInstructionsCounter].steps[stepsCounter].step;
                 stepsCounter = stepsCounter + 1;
             }
             console.log("---------------------------------------");
@@ -89,14 +98,24 @@ function getResponse( response ){
         }
 
         
-        imageAdd = response.results[resultsCounter].image; 
-        mealImage = $('<img />');
-        mealImage.attr("src", imageAdd);
-        $('#meal-image-view').append(mealImage);
-        console.log("AAAAA");
+        $(`#titleEl${resultsCounter+1}`).text(response.results[resultsCounter].title); //NOT --> $('#titleEl').val(response.results[resultsCounter].title);
+        
+        imageAdd = response.results[resultsCounter].image;  
+        $(`#currentMealImgEl${resultsCounter+1}`).attr("src", imageAdd);
+        // OR --> // imageAdd = response.results[resultsCounter].image; mealImage = $('<img />'); mealImage.attr("src", imageAdd); $('#meal-image-view').append(mealImage);
+
+        
+        $(`#recipeEl${resultsCounter+1}`).text(recipeConcat); 
+
+        document.querySelector(`#meal-image-view${resultsCounter+1}`).style.opacity = 1;
+        
+
         resultsCounter = resultsCounter + 1;
     }
 
+    
+    
+    
     
     
     
