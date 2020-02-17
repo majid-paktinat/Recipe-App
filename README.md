@@ -17,6 +17,8 @@ https://api.spoonacular.com/food/ingredients/autocomplete?query=appl&number=5&ap
 
 https://api.spoonacular.com/recipes/{id}/nutritionWidget?&defaultCss=true&apiKey=...
 
+https://api.spoonacular.com/recipes/search?query=cheese&number=2&apiKey=...
+
 https://spoonacular.com/food-api/docs#Diets
 https://spoonacular.com/food-api/docs#Cuisines
 https://spoonacular.com/food-api/docs#Meal-Types

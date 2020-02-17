@@ -5,7 +5,8 @@ let analyzedInstructionsArr = [];
 let imageAdd;
 let mealImage;
 
-const apikey = "78e1edf89c554641b274c2f5f5c2a0d6";
+const apikey = "78e1edf89c554641b274c2f5f5c2a0d6"; 
+//const apikey = "b588453d88164a63a6b235e77276dcd0";
 //const apikey = "c41463de00f744d08ecd2094f8d0da82";
 //const apikey = "54f37f7c8cf54dabb996147b296b7f34";
 
@@ -16,6 +17,8 @@ let intolerance;
 let ingredientIn;
 let ingredientEx;
 let sortByItem;
+let recipeName;
+let seachByNameFlag = false;
 let settings;
 let sortOrder = "desc";
 let offset = 0;
@@ -28,6 +31,7 @@ $("#btnSearch").on("click", function(event) {
     // We're using a form so that the user can hit enter instead of clicking the button if they want
     event.preventDefault();
 
+
     // This part grabs the inputs to do search
     ingredientIn = escape($("#ingredientIn").val().trim());
     ingredientEx = escape($("#ingredientEx").val().trim());
@@ -36,7 +40,7 @@ $("#btnSearch").on("click", function(event) {
     mealType = escape($("#mealType").val());mealType = (mealType=="nal")?"":mealType;
     intolerance =  escape($("#intolerance").val());intolerance = (intolerance=="nal")?"":intolerance;
     sortByItem =  escape($("#sortByI").val());sortByItem = (sortByItem=="nal")?"":sortByItem;
-    
+    recipeName =  escape($("#recipeName").val().trim());
     
     settingsAPI = {
         "async": true,
@@ -44,9 +48,19 @@ $("#btnSearch").on("click", function(event) {
         "method": "GET",
         "url": `https://api.spoonacular.com/recipes/complexSearch?minCalories=1&maxCalories=10000&minProtein=1&maxProtein=10000&minFat=1&maxFat=10000&minCarbs=1&maxCarbs=10000&number=${resultNumbers}&offset=${offset}&addRecipeInformation=true&sort=${sortByItem}&sortDirection=${sortOrder}&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
     }
-    
-    
-    searchCall();
+
+    document.querySelector("#pagingEl").style.opacity = 1;
+    if (recipeName!="") {
+        settingsAPI.url = `https://api.spoonacular.com/recipes/search?query=${recipeName}&number=${resultNumbers}&offset=${offset}&instructionsRequired=true&apiKey=${apikey}`;
+        seachByNameFlag = true;
+        infoCall();
+        $("#recipeName").val("");
+    }
+    else {
+        seachByNameFlag = false;
+        searchCall();
+    }
+
 });
 
 
@@ -56,17 +70,26 @@ function searchCall(){
     $.ajax(settingsAPI).fail(getError);
 }
 
-function nutritionCall(){
-    $.ajax(settingsAPI).then(getnutritionResponse);
+function infoCall(){
+    $.ajax(settingsAPI).then(getInfoResponse);
 
-    $.ajax(settingsAPI).fail(getnutritionError);
+    $.ajax(settingsAPI).fail(getInfoError);
 }
 
 
 function getResponse( response ){
-    console.log(`<.Then> callback <${response}>`);console.log(response);
-    
-    
+    console.log(`<.Then> callback <${response}>`);//console.log(response);
+    if (response.totalResults==0) {
+        console.log("Search Result is empty!"); document.querySelector("#errorEl").style.opacity = 1;document.querySelector("#pagingEl").style.opacity = 0;
+        document.querySelector(`#meal-image-view1`).style.opacity = 0;document.querySelector(`#meal-image-view2`).style.opacity = 0;
+        document.querySelector(`#resultView`).style.opacity = 1;
+        return;
+    }
+    else {
+        document.querySelector("#errorEl").style.opacity = 0;
+        document.querySelector(`#resultView`).style.opacity = 0;
+    }
+
     let resultsCounter = 0;
     
     while (resultsCounter<response.results.length){
@@ -126,24 +149,61 @@ function getResponse( response ){
 
         resultsCounter = resultsCounter + 1;
     }
-
-    
-    
-    
-    
-    
     
 }
+
+
 function getError( errorStatus ) {
     console.log(`<.Fail> callback <${errorStatus}>`);
 }
 
 
-function getnutritionResponse(response){
+function getInfoResponse(response){
     console.log(`<.Then> callback <${response}>`);
+    if (response.totalResults==0) {
+        console.log("Search Result is empty!"); document.querySelector("#errorEl").style.opacity = 1;document.querySelector("#pagingEl").style.opacity = 0;
+        document.querySelector(`#meal-image-view1`).style.opacity = 0;document.querySelector(`#meal-image-view2`).style.opacity = 0;
+        document.querySelector(`#resultView`).style.opacity = 1;
+        return;
+    }
+    else {
+        document.querySelector("#errorEl").style.opacity = 0;
+        document.querySelector(`#resultView`).style.opacity = 0;
+    }
+
+    settingsAPI.url = `https://api.spoonacular.com/recipes/${response.results[0].id}/information?includeNutrition=true&apiKey=${apikey}`;
+    $.ajax(settingsAPI).then(function(response){
+        let resultsCounter = 0;
+            
+        nutritionArr = response.nutrition.nutrients; // if response not empty!
+       
+
+        $(`#titleEl${resultsCounter+1}`).text(response.title); 
+        
+        imageAdd = response.image;
+        $(`#currentMealImgEl${resultsCounter+1}`).attr("src", imageAdd);
+
+        $(`#recipeEl${resultsCounter+1}`).text("Recipe : " + response.instructions);
+                
+        $(`#calEl${resultsCounter+1}`).html("Calories : " + Math.floor(nutritionArr[0].amount)+ " <b>" +nutritionArr[0].unit + "</b>");
+        $(`#proEl${resultsCounter+1}`).html("Protein : " + Math.floor(nutritionArr[8].amount)+ " <b>" +nutritionArr[8].unit + "</b>");
+        $(`#fatEl${resultsCounter+1}`).html("Fat : " + Math.floor(nutritionArr[1].amount)+ " <b>" +nutritionArr[1].unit + "</b>");
+        $(`#carEl${resultsCounter+1}`).html("Carbs : " + Math.floor(nutritionArr[3].amount)+ " <b>" +nutritionArr[3].unit + "</b>");
+
+        document.querySelector(`#meal-image-view${resultsCounter+1}`).style.opacity = 1;
+        document.querySelector(`#resultView`).style.opacity = 1; // if mokhalefe sefr
+
+        // disbale both the next and previous buttons
+        document.querySelector("#prevbutton").disabled = false;
+        document.querySelector("#nextbutton").disabled = false;
+        document.querySelector("#prevbutton").style.opacity = 0;
+        document.querySelector("#nextbutton").style.opacity = 0;
+
+    });
+
 }
 
-function getnutritionError(errorStatus){
+function getInfoError(errorStatus){
     console.log(`<.Fail> callback <${errorStatus}>`);
 }
 
