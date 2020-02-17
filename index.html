@@ -6,11 +6,41 @@
 	<title>Search Recipe</title>
 	<link rel="stylesheet" href="Assets/style.css">
 	<script src="https://code.jquery.com/jquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   
+	
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	
+	
 	<link href="https://fonts.googleapis.com/css?family=Fondamento|Great+Vibes|Kaushan+Script|Permanent+Marker|Sriracha&display=swap" rel="stylesheet">
+
+	
+
 </head>
 
 <body>
+	<style>
+		.pagination {
+		  display: inline-block;
+		}
+		
+		.pagination a {
+		  color: black;
+		  float: left;
+		  padding: 8px 16px;
+		  text-decoration: none;
+		  transition: background-color .3s;
+		  border: 1px solid #ddd;
+		}
+		
+		.pagination a.active {
+		  background-color: #4CAF50;
+		  color: white;
+		  border: 1px solid #4CAF50;
+		}
+		
+		.pagination a:hover:not(.active) {background-color: #ddd;}
+		</style>
 	<section id="s1">
 		<hgroup>
         	<h1>Dish Of Delish</h1>
@@ -148,9 +178,9 @@
 							<option value="protein">Protein</option>
 							<option value="calories">Calories</option>
 							<option value="fat">Fat</option>
-							<option value="sugar">Sugar</option>
-							<option value="sodium">Sodium</option>
-							<option value="fiber">fiber</option>
+							<!--option value="sugar">Sugar</option-->
+							<!--option value="sodium">Sodium</option-->
+							<!--option value="fiber">fiber</option-->
 						</select>
 					</div> 
 				</div>
@@ -217,7 +247,7 @@
 
 						</div>
 	
-						<div class="row" id="meal-image-view3" style="border: solid 0px; margin-left: 10px; margin-right: 10px; opacity: 0;">
+						<!--div class="row" id="meal-image-view3" style="border: solid 0px; margin-left: 10px; margin-right: 10px; opacity: 0;">
 							<div class="col" style="border:solid 1px; border-color: lightgray; margin-left: 15px; margin-right: 15px; margin-top:20px ; margin-bottom:20px; padding-bottom: 15px;">
 								<div class="row" style="border: solid 0px; padding-left: 10px; padding-right: 10px; padding-top:20px">
 									<div class="col"  id="titleEl3" style="border: solid 0px; margin-right: 10px;">&nbsp;</div>
@@ -291,13 +321,24 @@
 								</div> 
 								
 							</div>
-						</div>
+						</div-->
 	
+						
+						<div class="pagination">
+						<!--a href="#"  ></a-->
+						<button onclick="prevBtn()" id="prevbutton">❮</button>
+						<button onclick="nextBtn()" id="nextbutton">❯</button>
+						<!--a href="#" id="prevbutton" onclick="nextBtn()">❯</a-->
+						</div>
+
 					</div>
 				</div>
 		</article>
   		
 	</section>
+
+	
+
 	<script src="assets/script.js"></script>
 </body>
 </html>
