@@ -3,12 +3,11 @@ let nutritionArr = [];
 let analyzedInstructionsArr = [];
 
 let imageAdd;
-let mealImage
+let mealImage;
 
-//const apikey = "b588453d88164a63a6b235e77276dcd0";
-//const apikey = "7be734db65ca420487a133024e247177";
-const apikey = "54f37f7c8cf54dabb996147b296b7f34";
-
+const apikey = "78e1edf89c554641b274c2f5f5c2a0d6";
+//const apikey = "c41463de00f744d08ecd2094f8d0da82";
+//const apikey = "54f37f7c8cf54dabb996147b296b7f34";
 
 let diet;
 let cuisine;
@@ -37,10 +36,6 @@ $("#btnSearch").on("click", function(event) {
     mealType = escape($("#mealType").val());mealType = (mealType=="nal")?"":mealType;
     intolerance =  escape($("#intolerance").val());intolerance = (intolerance=="nal")?"":intolerance;
     sortByItem =  escape($("#sortByI").val());sortByItem = (sortByItem=="nal")?"":sortByItem;
-   
-   
-    
-    //console.log(ingredientIn);console.log(ingredientEx);console.log(diet);console.log(cuisine);console.log(mealType);console.log(intolerance);
     
     
     settingsAPI = {
@@ -69,7 +64,7 @@ function nutritionCall(){
 
 
 function getResponse( response ){
-    console.log(`<.Then> callback <${response}>`);//console.log(response);
+    console.log(`<.Then> callback <${response}>`);console.log(response);
     
     
     let resultsCounter = 0;
@@ -80,31 +75,31 @@ function getResponse( response ){
         // console.log(`Title is : ${response.results[resultsCounter].title}`);
         // console.log(`Dish Types : ${response.results[resultsCounter].dishTypes}`);
         
-        nutritionArr = response.results[resultsCounter].nutrition; 
+        nutritionArr = response.results[resultsCounter].nutrition;
         let nutritionCounter = 0;
         while(nutritionCounter<nutritionArr.length){
-            // console.log(`Nutrition Title : ${nutritionArr[nutritionCounter].title}`); 
-            // console.log(`Nutrition Amount : ${nutritionArr[nutritionCounter].amount}`); 
-            // console.log(`Nutrition Unit : ${nutritionArr[nutritionCounter].unit}`); 
+            // console.log(`Nutrition Title : ${nutritionArr[nutritionCounter].title}`);
+            // console.log(`Nutrition Amount : ${nutritionArr[nutritionCounter].amount}`);
+            // console.log(`Nutrition Unit : ${nutritionArr[nutritionCounter].unit}`);
             // console.log("--nutrition--");
             nutritionCounter = nutritionCounter + 1;
         }
 
         //console.log(`Servings : ${response.results[resultsCounter].servings}`);
-        analyzedInstructionsArr = response.results[resultsCounter].analyzedInstructions; 
+        analyzedInstructionsArr = response.results[resultsCounter].analyzedInstructions;
         let analyzedInstructionsCounter=0;
         let stepsCounter = 0;
         let recipeConcat;
         while (analyzedInstructionsCounter<analyzedInstructionsArr.length){
             recipeConcat = "Recipe : ";
             while(stepsCounter<analyzedInstructionsArr[analyzedInstructionsCounter].steps.length){
-                // console.log(`analyzedInstructions Name : ${analyzedInstructionsArr[analyzedInstructionsCounter].name}`); 
+                // console.log(`analyzedInstructions Name : ${analyzedInstructionsArr[analyzedInstructionsCounter].name}`);
                 // console.log(`analyzedInstructions Steps(number) : ${analyzedInstructionsArr[analyzedInstructionsCounter].steps[stepsCounter].number}`);
                 // console.log(`analyzedInstructions Steps(step) : ${analyzedInstructionsArr[analyzedInstructionsCounter].steps[stepsCounter].step}`);
                 recipeConcat = recipeConcat + ((recipeConcat=="Recipe : ")?"":" | ") + analyzedInstructionsArr[analyzedInstructionsCounter].steps[stepsCounter].step;
                 stepsCounter = stepsCounter + 1;
             }
-            // console.log("---------------------------------------");
+            //console.log("---------------------------------------");
             analyzedInstructionsCounter = analyzedInstructionsCounter + 1;
             stepsCounter = 0;
         }
@@ -112,18 +107,18 @@ function getResponse( response ){
         
         $(`#titleEl${resultsCounter+1}`).text(response.results[resultsCounter].title); //NOT --> $('#titleEl').val(response.results[resultsCounter].title);
         
-        imageAdd = response.results[resultsCounter].image;  
+        imageAdd = response.results[resultsCounter].image;
         $(`#currentMealImgEl${resultsCounter+1}`).attr("src", imageAdd);
         // OR --> // imageAdd = response.results[resultsCounter].image; mealImage = $('<img />'); mealImage.attr("src", imageAdd); $('#meal-image-view').append(mealImage);
 
         
-        $(`#recipeEl${resultsCounter+1}`).text(recipeConcat); 
+        $(`#recipeEl${resultsCounter+1}`).text(recipeConcat);
 
         
-        $(`#calEl${resultsCounter+1}`).html("Calories : " + Math.floor(nutritionArr[0].amount)+ " <b>" +nutritionArr[0].unit + "</b>"); 
+        $(`#calEl${resultsCounter+1}`).html("Calories : " + Math.floor(nutritionArr[0].amount)+ " <b>" +nutritionArr[0].unit + "</b>");
         $(`#proEl${resultsCounter+1}`).html("Protein : " + Math.floor(nutritionArr[1].amount)+ " <b>" +nutritionArr[1].unit + "</b>");
         $(`#fatEl${resultsCounter+1}`).html("Fat : " + Math.floor(nutritionArr[2].amount)+ " <b>" +nutritionArr[2].unit + "</b>");
-        $(`#carEl${resultsCounter+1}`).html("Carbs : " + Math.floor(nutritionArr[3].amount)+ " <b>" +nutritionArr[3].unit + "</b>"); 
+        $(`#carEl${resultsCounter+1}`).html("Carbs : " + Math.floor(nutritionArr[3].amount)+ " <b>" +nutritionArr[3].unit + "</b>");
 
         document.querySelector(`#meal-image-view${resultsCounter+1}`).style.opacity = 1;
         if (resultsCounter!=0) document.querySelector(`#resultView`).style.opacity = 1;
@@ -151,6 +146,7 @@ function getnutritionResponse(response){
 function getnutritionError(errorStatus){
     console.log(`<.Fail> callback <${errorStatus}>`);
 }
+
 
 function prevBtn(event){
     // console.log("prev");
@@ -181,5 +177,3 @@ function nextBtn(event){
     searchCall();
     //console.log(offset);
 }
-
-
