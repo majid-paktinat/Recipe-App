@@ -16,6 +16,7 @@ let mealType;
 let intolerance;
 let ingredientIn;
 let ingredientEx;
+let sortByItem;
 let settings;
 let sortOrder = "desc";
 let offset = 0;
@@ -36,7 +37,8 @@ $("#btnSearch").on("click", function(event) {
     mealType = escape($("#mealType").val());mealType = (mealType=="nal")?"":mealType;
     intolerance =  escape($("#intolerance").val());intolerance = (intolerance=="nal")?"":intolerance;
     sortByItem =  escape($("#sortByI").val());sortByItem = (sortByItem=="nal")?"":sortByItem;
-    if(sortByItem=="fat") sortByItem="total-fat";
+   
+   
     
     //console.log(ingredientIn);console.log(ingredientEx);console.log(diet);console.log(cuisine);console.log(mealType);console.log(intolerance);
     
@@ -143,11 +145,11 @@ function getError( errorStatus ) {
 
 
 function getnutritionResponse(response){
-    
+    console.log(`<.Then> callback <${response}>`);
 }
 
 function getnutritionError(errorStatus){
-
+    console.log(`<.Fail> callback <${errorStatus}>`);
 }
 
 function prevBtn(event){
@@ -167,8 +169,8 @@ function prevBtn(event){
 
 function nextBtn(event){
     // console.log("next");
-    if ((offset + resultNumbers) >= 4) {
-        offset = 4; // because of (offset - resultNumbers + 1)
+    if ((offset + resultNumbers) >= 98) {
+        offset = 98; // maximum 100 records will be shown
         document.querySelector("#nextbutton").disabled = true;
     } else {
         offset = offset + resultNumbers;
