@@ -5,9 +5,8 @@ let analyzedInstructionsArr = [];
 let imageAdd;
 let mealImage;
 
-//const apikey = "78e1edf89c554641b274c2f5f5c2a0d6"; 
 //const apikey = "b588453d88164a63a6b235e77276dcd0";
-const apikey = "c41463de00f744d08ecd2094f8d0da82";
+const apikey = "b30868845de24aed942167cfd5e76530";
 //const apikey = "54f37f7c8cf54dabb996147b296b7f34";
 
 let diet;
@@ -18,11 +17,11 @@ let ingredientIn;
 let ingredientEx;
 let sortByItem;
 let recipeName;
+let seachByNameFlag = false;
 let settings;
 let sortOrder = "desc";
 let offset = 0;
 let resultNumbers = 2;
-let totalResults;
 document.querySelector("#prevbutton").disabled = true;
     
 // This function handles events where one button is clicked
@@ -52,11 +51,12 @@ $("#btnSearch").on("click", function(event) {
     document.querySelector("#pagingEl").style.opacity = 1;
     if (recipeName!="") {
         settingsAPI.url = `https://api.spoonacular.com/recipes/search?query=${recipeName}&number=${resultNumbers}&offset=${offset}&instructionsRequired=true&apiKey=${apikey}`;
+        seachByNameFlag = true;
         infoCall();
-        offset = 0; // reset the offset
         $("#recipeName").val("");
     }
     else {
+        seachByNameFlag = false;
         searchCall();
     }
 
@@ -77,25 +77,23 @@ function infoCall(){
 
 
 function getResponse( response ){
-    console.log(`<.Then> callback <${response}>`);//console.log(response.totalResults);
-    document.querySelector("#resultView").style.opacity = 1;
+    console.log(`<.Then> callback <${response}>`);//console.log(response);
     if (response.totalResults==0) {
-        console.log("Search Result is empty!"); 
+        console.log("Search Result is empty!");
+        document.getElementById("myDIV").style.display = "none";
         document.querySelector("#errorEl").style.opacity = 1;
         document.querySelector("#pagingEl").style.opacity = 0;
-        document.querySelector("#meal-image-view1").style.opacity = 0;
-        document.querySelector("#meal-image-view2").style.opacity = 0;
+        document.querySelector(`#meal-image-view1`).style.opacity = 0;
+        document.querySelector(`#meal-image-view2`).style.opacity = 0;
+        document.querySelector(`#resultView`).style.opacity = 1;
         return;
     }
     else {
+        document.querySelector("#s3").style.opacity =0;
         document.querySelector("#errorEl").style.opacity = 0;
-        document.querySelector("#pagingEl").style.opacity = 1; checkBtn(); 
-        document.querySelector("#meal-image-view1").style.opacity = 1;
-        document.querySelector("#meal-image-view2").style.opacity = 1;
-        //document.querySelector(`#resultView`).style.opacity = 0;
-        totalResults = response.totalResults;
+        document.querySelector(`#resultView`).style.opacity = 0;
     }
-    
+
     let resultsCounter = 0;
     
     while (resultsCounter<response.results.length){
@@ -151,8 +149,6 @@ function getResponse( response ){
 
         document.querySelector(`#meal-image-view${resultsCounter+1}`).style.opacity = 1;
         if (resultsCounter!=0) document.querySelector(`#resultView`).style.opacity = 1;
-        
-
         resultsCounter = resultsCounter + 1;
     }
     
@@ -166,25 +162,19 @@ function getError( errorStatus ) {
 
 function getInfoResponse(response){
     console.log(`<.Then> callback <${response}>`);
-    
-    document.querySelector("#resultView").style.opacity = 1;
     if (response.totalResults==0) {
-        console.log("Search Result is empty!"); 
+        console.log("Search Result is empty!");
+        document.getElementById("s3").style.display = "none";
         document.querySelector("#errorEl").style.opacity = 1;
         document.querySelector("#pagingEl").style.opacity = 0;
-        document.querySelector("#meal-image-view1").style.opacity = 0;
-        document.querySelector("#meal-image-view2").style.opacity = 0;
+        document.querySelector(`#meal-image-view1`).style.opacity = 0;document.querySelector(`#meal-image-view2`).style.opacity = 0;
+        document.querySelector(`#resultView`).style.opacity = 1;
         return;
     }
     else {
         document.querySelector("#errorEl").style.opacity = 0;
-        document.querySelector("#pagingEl").style.opacity = 0;
-        document.querySelector("#meal-image-view1").style.opacity = 1;
-        document.querySelector("#meal-image-view2").style.opacity = 0;
-        //document.querySelector(`#resultView`).style.opacity = 0;
-        totalResults = response.totalResults;
+        document.querySelector(`#resultView`).style.opacity = 0;
     }
-
 
     settingsAPI.url = `https://api.spoonacular.com/recipes/${response.results[0].id}/information?includeNutrition=true&apiKey=${apikey}`;
     $.ajax(settingsAPI).then(function(response){
@@ -193,7 +183,7 @@ function getInfoResponse(response){
         nutritionArr = response.nutrition.nutrients; // if response not empty!
        
 
-        $(`#titleEl${resultsCounter+1}`).text(response.title); 
+        $(`#titleEl${resultsCounter+1}`).text(response.title);
         
         imageAdd = response.image;
         $(`#currentMealImgEl${resultsCounter+1}`).attr("src", imageAdd);
@@ -211,7 +201,8 @@ function getInfoResponse(response){
         // disbale both the next and previous buttons
         document.querySelector("#prevbutton").disabled = false;
         document.querySelector("#nextbutton").disabled = false;
-        
+        document.querySelector("#prevbutton").style.opacity = 0;
+        document.querySelector("#nextbutton").style.opacity = 0;
 
     });
 
@@ -223,30 +214,32 @@ function getInfoError(errorStatus){
 
 
 function prevBtn(event){
-    offset = offset - resultNumbers;
-    checkBtn();
-    settingsAPI.url = `https://api.spoonacular.com/recipes/complexSearch?minCalories=1&maxCalories=10000&minProtein=1&maxProtein=10000&minFat=1&maxFat=10000&minCarbs=1&maxCarbs=10000&number=${resultNumbers}&offset=${offset}&addRecipeInformation=true&sort=${sortByItem}&sortDirection=${sortOrder}&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
-    searchCall();
-}
-
-
-function nextBtn(event){
-    offset = offset + resultNumbers;
-    checkBtn();
-    settingsAPI.url = `https://api.spoonacular.com/recipes/complexSearch?minCalories=1&maxCalories=10000&minProtein=1&maxProtein=10000&minFat=1&maxFat=10000&minCarbs=1&maxCarbs=10000&number=${resultNumbers}&offset=${offset}&addRecipeInformation=true&sort=${sortByItem}&sortDirection=${sortOrder}&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
-    searchCall();
-}
-
-function checkBtn(){
-    if ((offset) <= 0) {
-        offset = 0; 
+    // console.log("prev");
+    if ((offset - resultNumbers) <= 0) {
+        offset = 0;
         document.querySelector("#prevbutton").disabled = true;
-    } else if ((offset) >= (totalResults-2)) {
-        offset = totalResults - 2 ; // maximum totalResults records will be shown
-        document.querySelector("#nextbutton").disabled = true;
-    } else{
+    } else {
+        offset = offset - resultNumbers;
         document.querySelector("#prevbutton").disabled = false;
         document.querySelector("#nextbutton").disabled = false;
     }
-
+    settingsAPI.url = `https://api.spoonacular.com/recipes/complexSearch?minCalories=1&maxCalories=10000&minProtein=1&maxProtein=10000&minFat=1&maxFat=10000&minCarbs=1&maxCarbs=10000&number=${resultNumbers}&offset=${offset}&addRecipeInformation=true&sort=${sortByItem}&sortDirection=${sortOrder}&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
+    searchCall();
+    // console.log(offset);
 }
+
+function nextBtn(event){
+    // console.log("next");
+    if ((offset + resultNumbers) >= 98) {
+        offset = 98; // maximum 100 records will be shown
+        document.querySelector("#nextbutton").disabled = true;
+    } else {
+        offset = offset + resultNumbers;
+        document.querySelector("#prevbutton").disabled = false;
+        document.querySelector("#nextbutton").disabled = false;
+    }
+    settingsAPI.url = `https://api.spoonacular.com/recipes/complexSearch?minCalories=1&maxCalories=10000&minProtein=1&maxProtein=10000&minFat=1&maxFat=10000&minCarbs=1&maxCarbs=10000&number=${resultNumbers}&offset=${offset}&addRecipeInformation=true&sort=${sortByItem}&sortDirection=${sortOrder}&includeIngredients=${ingredientIn}&excludeIngredients=${ingredientEx}&diet=${diet}&cuisine=${cuisine}&type=${mealType}&cuisine=${intolerance}&apiKey=${apikey}`
+    searchCall();
+    //console.log(offset);
+}
+

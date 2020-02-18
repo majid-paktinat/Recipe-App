@@ -1,141 +1,224 @@
 /* === RESPONSIVE FLEX EXAMPLE W/ MEDIA QUERIES */
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 html, body {
-    height:100%;
+  height:100%;
 }
 
 /* === MOBILE FIRST === */
 
 #s1 {
-    background: url(../Assets/images/bg5.jpg) no-repeat fixed center center;
-    background-size: cover;
-    min-height:80%;
-    height:auto;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+  background: url(../Assets/images/bg5.jpg) no-repeat fixed center center;
+  background-size: cover;
+  min-height:80%;
+  height:auto;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #s1 hgroup {
-    background:rgba(0,0,0,.7);
-    padding: 10px;
+  background:rgba(0,0,0,.7);
+  padding: 10px;
 }
 
 #s1 h1, #s1 h2 {
-    color:#fff;
-    text-align: center;
+  color:#fff;
+  text-align: center;
 }
 #s1 h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 4vmax;
+  font-family: 'Great Vibes', cursive;
+  font-size: 4vmax;
 }
 #s1 h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2vmax;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2vmax;
 }
 
 #s2 {
-    display: flex;
-    flex-flow: row wrap;
-    text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
 }
 #s2 h2 {
-    font-family: 'Fondamento', cursive
+  font-family: 'Fondamento', cursive
 }
 
 .main {
-    background: #DAECF3;
-    text-align: left;
-    padding:80px;
-    flex: 1 100%;
-    padding-top: 20px;
-    padding-left: 50px;
+  background: #DAECF3;
+  text-align: left;
+  padding:80px;
+  flex: 1 100%;
+  padding-top: 20px;
+  padding-left: 50px;
 }
 .aside1 {
-    font-weight: bold;
-    background: #C4B8AA;
-    padding:30px;
-    flex: 1 100%;
-    font-family: 'Fondamento', cursive
-    
+  font-weight: bold;
+  background: #C4B8AA;
+  padding:30px;
+  flex: 1 100%;
+  font-family: 'Fondamento', cursive
+  
 }
 
 
 /* === TABLET LAYOUT INHERITS FROM MOBILE === */
 @media all and (min-width: 600px) {
-    .aside { flex: 1 auto; }
+  .aside { flex: 1 auto; }
 }
 
 /* === DESKTOP LAYOUT INHERITS FROM MOBILE AND TABLET === */
 
 @media all and (min-width: 800px) {
-    .main    { flex: 3 0px; }
-    .aside1 { order: 1; }
-    .main    { order: 3; }
-    .aside2 { order: 2; }
-    #s1 h1 {
-        font-family: 'Great Vibes', cursive;
-        font-size: 10vmax;
-    }
+  .main    { flex: 3 0px; }
+  .aside1 { order: 1; }
+  .main    { order: 3; }
+  .aside2 { order: 2; }
+  #s1 h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 10vmax;
+  }
 }
 
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-  }
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
 #titleEl1{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 30px;
-    font-weight: bold;
-    color:rosybrown;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 30px;
+  font-weight: bold;
+  color:rosybrown;
 }
-  #recipeEl1{
-    font-family: 'Sriracha', cursive;
-    text-align: justify;
-  }
-  #titleEl2{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 30px;
-    font-weight: bold;
-    color:rosybrown;
+#recipeEl1{
+  font-family: 'Sriracha', cursive;
+  text-align: justify;
 }
-  #recipeEl2{
-    font-family: 'Sriracha', cursive;
-    text-align: justify;
-  }
-  #titleEl3{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 30px;
-    font-weight: bold;
-    color:rosybrown;
+#titleEl2{
+  font-family: 'Kaushan Script', cursive;
+  font-size: 30px;
+  font-weight: bold;
+  color:rosybrown;
 }
-  #recipeEl3{
-    font-family: 'Sriracha', cursive;
-    text-align: justify;
-  }
-  #titleEl4{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 30px;
-    font-weight: bold;
-    color:rosybrown;
+#recipeEl2{
+  font-family: 'Sriracha', cursive;
+  text-align: justify;
 }
-  #recipeEl4{
-    font-family: 'Sriracha', cursive;
-    text-align: justify;
-  }
-  #titleEl5{
-    font-family: 'Kaushan Script', cursive;
-    font-size: 30px;
-    font-weight: bold;
-    color:rosybrown;
+
+#s3 {
+  width:100%;
+  min-height: 80%;
+  height: auto;
+  background: white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
 }
-  #recipeEl5{
-    font-family: 'Sriracha', cursive;
-    text-align: justify;
-  }
+
+figure {
+  overflow: hidden;
+  border-radius: 0px;
+  position: relative;
+  background: #777;
+  height: 370px;
+  width:300px;
+  text-align: center;
+/*    box-shadow: 0px 0px 0px rgba(0,0,0,0);*/
+  transition: all .5s;
+}
+
+figure:hover {
+/*    background: tomato;*/
+  border-radius: 20px;
+  box-shadow: 0px 0px 40px rgba(0,0,0,.75);
+}
+
+#f1 {
+  background: url(../Assets/images/soup.jpg) no-repeat center center;
+}
+
+#f1:hover {
+  background: url(../Assets/images/soup.jpg) no-repeat right center;
+}
+
+#f2 {
+  background: url(../Assets/images/salad.jpg) no-repeat center center;
+}
+
+#f2:hover {
+  background: url(../Assets/images/salad.jpg) no-repeat right center;
+}
+
+#f3 {
+  background: url(../Assets/images/drink.jpg) no-repeat center center;
+}
+
+#f3:hover {
+  background: url(../Assets/images/drink.jpg) no-repeat right center;
+}
+#f4 {
+  background: url(../Assets/images/appetizer.jpg) no-repeat center center;
+}
+
+#f4:hover {
+  background: url(../Assets/images/appetizer.jpg) no-repeat right center;
+}
+
+#f5 {
+  background: url(../Assets/images/bread.jpg) no-repeat center center;
+}
+
+#f5:hover {
+  background: url(../Assets/images/bread.jpg) no-repeat right center;
+}
+
+#f6 {
+  background: url(../Assets/images/fingerfood.jpg) no-repeat center center;
+}
+
+#f6:hover {
+  background: url(../Assets/images/fingerfood.jpg) no-repeat right center;
+}
+
+
+figure h1 {
+  font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+  font-size:48px;
+  color:#fff;
+  width:100%;
+  text-shadow: 1px 1px 0px #333;
+  position: absolute;
+  top:20px;
+  opacity: 0;
+  transition: all .5s;
+}
+
+figure:hover h1 {
+  top:100px;
+  opacity: 1;
+}
+
+figure figcaption {
+  font-family: Georgia, "serif";
+  font-style: italic;
+  background: rgba(0,0,0,.75);
+  color: #fff;
+  padding:20px;
+  position: absolute;
+  bottom: -100px;
+  width:100%;
+  transition: all .5s .3s;
+}
+
+figure:hover figcaption {
+  bottom: 0px;
+}
+
+
+
